@@ -12,6 +12,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* 
+  #body {
+    font-family: Arial, sans-serif;
+    background-color: #1fbb1c; 
+    margin: 0;
+    padding: 0;
+  } */
+
 
 a {
   font-weight: 500;
@@ -26,6 +34,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  background-color: #fff8e9;
   min-width: 320px;
   min-height: 100vh;
 }
