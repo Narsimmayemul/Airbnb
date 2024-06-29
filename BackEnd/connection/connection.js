@@ -12,17 +12,18 @@ const userSchema = mongoose.Schema({
     isVerified: { type: Boolean, default: false }
 });
 
-const placeSchema = mongoose.Schema({
-    image : {type : String , required:true},
-    location : {type:String , required:true},
-    distance : {type:String , required:true},
-    date : {type :String , required:true},
+const WineSchema = mongoose.Schema({
+    id: {type  : Number , required:true},
+    img_url : {type : String , required:true},
+    name : {type:String , required:true},
+    category : {type:String , required:true},
+    flag : {type :String , required:true},
     price: {type:Number , required:true},
-    star : {type:Number , required:true}
+    rating : {type:Number , required:true}
 })
 
-const placeModule = mongoose.model('place' , placeSchema);
+const WineModule = mongoose.model('WineData' , WineSchema);
 const userModule = mongoose.model('User' , userSchema);
 
 
-module.exports = {userModule , connection , placeModule}
+module.exports = {userModule , connection , WineModule}

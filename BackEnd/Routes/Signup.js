@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         const verificationCode = crypto.randomBytes(3).toString('hex');
 
         const newUser = await userModule.create({
-            username,
+            username : username,
             password: hashedPassword,
             email,
             verificationCode,
@@ -58,7 +58,7 @@ router.post('/', async (req, res) => {
         });
     } catch (error) {
         console.error('Error Creating User:', error);
-        res.status(500).json({ error: 'Internal Server Error', details: error.message });
+        res.status(500).json({ error: 'Username alredy Exists', details: error.message });
     }
 });
 

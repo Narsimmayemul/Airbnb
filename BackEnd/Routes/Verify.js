@@ -6,6 +6,7 @@ router.post('/', async (req, res) => {
     const { email, verificationCode } = req.body;
 
     try {
+        // console.log(email);
         const user = await userModule.findOne({ email });
 
         if (!user) {
