@@ -5,11 +5,16 @@ import './styles/LoginStyle.css';
 import { useNavigate } from 'react-router-dom';
 import { emailContext } from '../context/email';
 import {OrbitProgress, ThreeDot} from 'react-loading-indicators';
+import { AuthContext, useAuth } from '../context/auth';
 
 const Login = () => {
   const navigate = useNavigate()
   const { url } = useContext(UrlContext);
+
   const {setUserMail} = useContext(emailContext)
+  // const {setAuthenticated} = useContext(AuthContext)
+  const { login , setAuthenticated } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -33,6 +38,9 @@ const Login = () => {
       setIsLoading(false)
       if(isSignUp){
         setUserMail(response.data.user)
+        login(token)
+        setAuthenticated(true);
+        console.log(token)
         navigate('/verify')
       }else{
           navigate('/')
