@@ -19,6 +19,7 @@ const verifyRouter = require('./Routes/Verify');
 app.use('/api/signup', signupRouter);
 app.use('/api/signin', signinRouter);
 app.use('/api/WineData', dataRouter);
+app.use('/api/userData', dataRouter);
 app.use('/api/verify' , verifyRouter);
 
 app.get("/" , (req ,res)=>{

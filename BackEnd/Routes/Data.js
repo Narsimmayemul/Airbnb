@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {WineModule} = require('../connection/connection');
+const {WineModule, userModule} = require('../connection/connection');
 const authentication = require('../Auth/authentication');
 // module.exports = router;
 
@@ -14,13 +14,19 @@ router.get('/'  , async(req , res)=>{
     }
 })
 
-router.get("/data" , async (req ,res)=>{
+router.get("/user/:id", async (req, res) => {
+    const { id } = req.params;
+  
     try {
-        const data = await WineModule.find();
-        res.status(200).send(data);        
+      const data = await userModule.findById(id);
+      if (!data) {
+        return res.status(404).send('User not found');
+      }
+      res.status(200).json(data);
     } catch (error) {
-        res.status(500).send("error from get data :" + error);
+      res.status(500).send("Error retrieving data: " + error);
     }
-})
+  });
+  
 
 module.exports = router;
