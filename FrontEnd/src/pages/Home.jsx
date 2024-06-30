@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card, CardBody, CardFooter, Image, HStack, IconButton } from '@chakra-ui/react';
+import { Box, Card, CardBody, CardFooter, Image, HStack, IconButton, CardHeader, Text } from '@chakra-ui/react';
 import { FaCircle } from 'react-icons/fa';
 import one from './img/one.jpg';
 import two from './img/two.jpg';
@@ -14,10 +14,12 @@ import e from './video/e.mp4';
 import f from './video/f.mp4';
 import g from './video/g.mp4';
 import h from './video/h.mp4';
+import n from './video/n.mp4';
+import s from './video/s.mp4';
 
 const Home = () => {
   const images = [one, two, three, four, five];
-  const videos = [c, d, e,  g,a,b,h,f];
+  const videos = [c, d,h ,g,a , e,n,s];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -66,26 +68,28 @@ const Home = () => {
                 variant="unstyled"
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Go to slide ${index + 1}`}
+                border={'none'}
               />
             ))}
           </HStack>
         </CardFooter>
       </Card>
       {/* Card to Display Videos */}
-      
-      <Card mt={4}bg={'#fff8e9'}>
+      <Card mt={4} bg={'#fff8e9'}>
+        <CardHeader textAlign={'start'}>
+          <Text color={'black'} fontFamily={'Times New Roman Times serif'} fontSize={'35px'}>Are They Looking Tempting?</Text>
+        </CardHeader>
         <CardBody>
           <Box
             display="grid"
-            gridTemplateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
+            gridTemplateColumns={{ base: 'repeat(2, 1fr)',md: 'repeat(4, 1fr)' }}
             gap={4}
           >
             {videos.map((video, index) => (
-              <Box key={index} position="relative" overflow="hidden" borderRadius="lg">
+              <Box key={index} position="relative" overflow="hidden" h={'100%'} borderRadius="10px">
                 <video
                   src={video}
                   width="100%"
-                  height="100%"
                   style={{ objectFit: 'cover' }}
                   onMouseOver={(e) => e.target.play()}
                   onMouseOut={(e) => e.target.pause()}
