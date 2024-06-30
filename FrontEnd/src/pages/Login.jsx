@@ -3,19 +3,24 @@ import axios from 'axios';
 import { UrlContext } from '../context/url';
 import './styles/LoginStyle.css';
 import { useNavigate } from 'react-router-dom';
+import { emailContext } from '../context/email';
+import {OrbitProgress, ThreeDot} from 'react-loading-indicators';
 
 const Login = () => {
   const navigate = useNavigate()
   const { url } = useContext(UrlContext);
+  const {setUserMail} = useContext(emailContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const endpoint = isSignUp ? 'api/signup' : 'api/signin';
       const payload = isSignUp ? { email, password, username } : { email, password };
       const response = await axios.post(`${url}${endpoint}`, payload);
@@ -24,13 +29,17 @@ const Login = () => {
       const userData = response.data.user;
       localStorage.setItem('token' , token);
       localStorage.setItem('user' , userData._id);
+      
+      setIsLoading(false)
       if(isSignUp){
+        setUserMail(response.data.user)
         navigate('/verify')
       }else{
           navigate('/')
         }
     } catch (error) {
-        // console.log(error)
+      setIsLoading(false)
+        console.log(error)
       setError(error.response.data.error);
     }
   };
@@ -43,7 +52,9 @@ const Login = () => {
         <div>
           <strong><h2 style={{ fontSize: '40px', textDecoration: 'bold' }}>{isSignUp ? 'Sign Up' : 'Sign In'}</h2></strong>
         </div>
+        
         {error && <p>{error}</p>}
+        {isLoading ? <OrbitProgress variant="dotted" color="#32cd32" size="large" text="" textColor="#2d9f0e" />: 
         <form onSubmit={handleSubmit} className='form_class'>
           {isSignUp && (
             <div className='input_lable'>
@@ -79,6 +90,7 @@ const Login = () => {
             <p>Forgot Password !</p>
           </div>
         </form>
+}
       </div>
 
       <div className='secoundHalf'>

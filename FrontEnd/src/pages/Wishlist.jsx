@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Gateway = () => {
+const Wishlist = () => {
   return (
     <div>
-      
+      Wishlist
     </div>
   )
 }
 
-export default Gateway
+export default Wishlist

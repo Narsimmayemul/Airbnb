@@ -1,0 +1,40 @@
+.parentDiv {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: larger;
+    width: 100%;
+    margin-left: -50px; 
+    }
+    
+    /* LEFT Side */
+    
+    .firstDiv {
+    border: 1px solid black;
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box; 
+    }
+    
+    .right {
+    display: flex;
+    }
+    
+    .img {
+    width: 40px;
+    height: 30px;
+    margin-right: 5px;
+    }    
+
+    @media (max-width: 768px) {
+        .parentDiv {
+        
+        }
+        .firstDiv {
+       
+        }
+        }
+        

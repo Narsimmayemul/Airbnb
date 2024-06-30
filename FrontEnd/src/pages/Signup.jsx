@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UrlContext } from '../context/url';
+import { emailContext } from '../context/email';
 
 const Signup = () => {
   const { url } = useContext(UrlContext);
+  const {setUserMail} = useContext(emailContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,6 +19,7 @@ const Signup = () => {
       setMessage(response.data.message);
     } catch (error) {
       setError('Signup failed');
+      console.log(error)
     }
   };
 

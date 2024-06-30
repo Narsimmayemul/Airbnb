@@ -1,0 +1,41 @@
+// import React from 'react'
+// import user from './img/user.png'
+// import love from './img/love.png'
+// import shopping from './img/shopping.png'
+// import './styles/Navbar.css'
+
+// const Navbar = () => {
+//   return (
+//     <div className='parentDiv'>
+//        <div className='firstDiv'>
+//         <div className='left'>
+//           <h4> UA | EN 0 800 123 456 </h4>
+//         </div>
+
+//         <div className='right'>
+//           <img className='img' src={user} alt="user" />
+//           <img className='img' src={love} alt="user" />
+//           <img className='img' src={shopping} alt="user" />
+//         </div>
+//        </div>
+
+// {/* secound Half */}
+//        <div className='secondDiv'>
+
+//         <div className='Second_left'>
+//           <h3>Mine Wine</h3>
+//         </div>
+
+//         <div className='Second_Right'>
+//           Category
+//           <br />
+//           Searching
+//         </div>
+
+//        </div>
+
+//     </div>
+//   )
+// }
+
+// export default Navbar

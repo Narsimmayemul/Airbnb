@@ -6,17 +6,20 @@ import {ChakraProvider} from '@chakra-ui/react';
 import { UrlContextProvider } from './context/url.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/auth.jsx';
+import { EmailContextProvider } from './context/email';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ChakraProvider>
       <AuthProvider>
         <UrlContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <EmailContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </EmailContextProvider>
         </UrlContextProvider>
       </AuthProvider>
     </ChakraProvider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )
