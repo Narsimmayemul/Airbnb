@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card, CardBody, CardFooter, Image, HStack, IconButton, CardHeader, Text } from '@chakra-ui/react';
+import { Box, Card, CardBody, CardFooter, Image, HStack, IconButton, CardHeader, Text, Button } from '@chakra-ui/react';
 import { FaCircle } from 'react-icons/fa';
 import one from './img/one.jpg';
 import two from './img/two.jpg';
@@ -16,11 +16,21 @@ import g from './video/g.mp4';
 import h from './video/h.mp4';
 import n from './video/n.mp4';
 import s from './video/s.mp4';
+import g1 from './img/g1.jpg'
+import g2 from './img/g2.jpg'
+import g3 from './img/g3.jpg'
+import g4 from './img/g4.jpg'
+import g5 from './img/g5.jpg'
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Home = () => {
   const images = [one, two, three, four, five];
   const videos = [c, d,h ,g,a , e,n,s];
+  const gifts = [g1,g2,g3,g5];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -74,8 +84,10 @@ const Home = () => {
           </HStack>
         </CardFooter>
       </Card>
+
       {/* Card to Display Videos */}
-      <Card mt={4} bg={'#fff8e9'}>
+
+      <Card mt={4} bg={'#fff8e9'} border={'none'} boxShadow={'none'}>
         <CardHeader textAlign={'start'}>
           <Text color={'black'} fontFamily={'Times New Roman Times serif'} fontSize={'35px'}>Are They Looking Tempting?</Text>
         </CardHeader>
@@ -89,6 +101,7 @@ const Home = () => {
               <Box key={index} position="relative" overflow="hidden" h={'100%'} borderRadius="10px">
                 <video
                   src={video}
+                  onClick={()=>{navigate('/products')}}
                   width="100%"
                   style={{ objectFit: 'cover' }}
                   onMouseOver={(e) => e.target.play()}
@@ -100,6 +113,30 @@ const Home = () => {
             ))}
           </Box>
         </CardBody>
+      </Card>
+
+      {/* Gift Section */}
+
+      <Card bg={'#fff8e9'} mt={5}>
+        <CardHeader>
+          <Text color={'black'} fontFamily={'Times New Roman Times serif'} fontSize={'35px'}>Gift To Your Loved Once ❤️</Text>
+        </CardHeader>
+
+        <CardBody display={'grid'} gridTemplateColumns={{ base: 'repeat(2, 1fr)',md: 'repeat(4, 1fr)' }} gap={5} borderRadius={'10px'}>
+            {gifts.map((e , i)=>(
+              <Image 
+              key={i}
+              src={e}
+              borderRadius={'10px'}
+              cursor={'pointer'}
+              w={'100%'}
+              onClick={()=>{navigate('/products')}}
+              />
+            ))}
+        </CardBody>
+        <CardFooter display={'flex'} justify={'center'}>
+          <Button onClick={()=>navigate('products')} bg={'#fff8e9'} border={'1px solid black'}>View All</Button>
+        </CardFooter>
       </Card>
     </Box>
   );
