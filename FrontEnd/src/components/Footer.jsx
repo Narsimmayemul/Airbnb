@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Flex, Grid, Input, Text } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import web from './img/world-wide-web.png'
@@ -6,6 +6,7 @@ import linkedin from './img/linkedin.png'
 
 const Footer = () => {
   const navigate = useNavigate()
+  const [subscribe, setSubscribe] = useState("Subscribe");
   return (
     <Box>
       <Flex
@@ -84,7 +85,7 @@ const Footer = () => {
             <Text cursor={'pointer'} color='black'>Get -20% on your first order</Text>
             <Box>
               <Input border={'1px solid black'} placeholder='Email...'/>
-              <Button cursor={'pointer'}>Subscribe</Button>
+              <Button cursor={'pointer'} onClick={()=>setSubscribe("Subscribed")}>{subscribe}</Button>
             </Box>
             <Box display={'flex'} mt={10} gap={5} justifyContent={'center'} alignItems={'center'}>
               <a target="_blank" href="https://narsimmayemul.github.io/">

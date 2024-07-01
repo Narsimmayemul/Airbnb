@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card, CardBody, CardFooter, Image, HStack, IconButton, CardHeader, Text, Button } from '@chakra-ui/react';
+import { Box, Card, CardBody, CardFooter, Image, HStack, IconButton, CardHeader, Text, Button, Input } from '@chakra-ui/react';
 import { FaCircle } from 'react-icons/fa';
 import one from './img/one.jpg';
 import two from './img/two.jpg';
@@ -16,12 +16,21 @@ import g from './video/g.mp4';
 import h from './video/h.mp4';
 import n from './video/n.mp4';
 import s from './video/s.mp4';
-import g1 from './img/g1.jpg'
-import g2 from './img/g2.jpg'
-import g3 from './img/g3.jpg'
-import g4 from './img/g4.jpg'
-import g5 from './img/g5.jpg'
+import g1 from './img/g1.jpg';
+import g2 from './img/g2.jpg';
+import g3 from './img/g3.jpg';
+import g4 from './img/g4.jpg';
+import g5 from './img/g5.jpg';
+import sub from './img/sub.jpg';
 import { useNavigate } from 'react-router-dom';
+import cutting from './img/making/cuting.jpg'
+import juse from './img/making/juse.jpg'
+import store from './img/making/store.jpg'
+import packing from './img/making/packing.jpg'
+import blue1 from './img/making/blue1.jpg'
+import blue2 from './img/making/blue2.jpg'
+import blue3 from './img/making/blue3.jpg'
+import blue4 from './img/making/blue4.jpg'
 
 
 
@@ -29,7 +38,11 @@ const Home = () => {
   const images = [one, two, three, four, five];
   const videos = [c, d,h ,g,a , e,n,s];
   const gifts = [g1,g2,g3,g5];
+  const process = [cutting,juse,store,packing];
+  const grap = [blue3,blue4,blue1 , blue2]
+
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [subscribe, setSubscribe] = useState("Subscribe");
   const navigate = useNavigate();
 
   const nextSlide = () => {
@@ -138,6 +151,49 @@ const Home = () => {
           <Button onClick={()=>navigate('products')} bg={'#fff8e9'} border={'1px solid black'}>View All</Button>
         </CardFooter>
       </Card>
+
+      {/* Subscription yaha hoga */}
+      
+      <Box display={'flex'} boxShadow={'grey 0px 0px 9px 0px'} gap={'5%'} w={'100%'} h={'100%'} mt={10} p={10} flexDirection={{base:'column' , sm:'row'}} borderRadius={'15px'} justifyContent={'center'} alignItems={'center'}>
+        <Box w={'45%'}  display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
+            <Text color={'black'} fontSize={'30px'} fontFamily='Times New Roman Times serif' fontWeight={'bold'}>Wine subscription!</Text>
+            <Text color={'black'} fontSize={'18px'} fontFamily='Times New Roman Times serif' >subscription is a journey through the world of wine,four bottles at a time. Each month, we select wines based on a chosen theme and explain how each bottle fits that theme - it's wine education and enjoyment in a equal measure!</Text>
+
+            <Box display={'flex'} justifyContent={'center'} alignItems={'center'} gap={3} p={6} flexDirection={{base:'column' , md:'row'}}>
+            <Input placeholder='Add Email for Subscription...' border={'1px solid black'} />
+            <Button onClick={()=> setSubscribe("Subscribed")}>{subscribe}</Button>
+            </Box>
+        </Box>
+
+        <Box w={'45%'} display={'flex'}>
+            <Image w={'100%'} src={sub} alt='Image' h={'550px'} borderRadius={'15px'}/>
+        </Box>
+      </Box>
+      {/* graps */}
+
+      <Box mt={10} mb={5} p={10} justifyContent={'center'} alignItems={'center'} display={'grid'} gridTemplateColumns={{base:'repeat(2,1fr)' , md:'repeat(4,1fr)'}} gap={4}>
+        {grap.map((e , i)=>(
+          <Box key={i}>
+            <Image src={e} alt='Graps' borderRadius={'10px'} h={'450px'}/>
+          </Box>
+        ))}
+        
+      </Box>
+      {/* Process */}
+
+      <Box display={'flex'} flexDirection={'column'}>
+        <Text color={'black'} fontFamily={'Times New Roman Times serif'} fontSize={'35px'}>
+          Process Of Wine Making...😋
+          </Text>
+
+          <Box p={10} gap={5} display={'grid'} gridTemplateColumns={{base:'repeat(2,1fr)' , md:'repeat(4,1fr)'}}>
+            {process.map((e , i)=>(
+              <Box key={i}>
+                <Image src={e} alt='img' h={'250px'} borderRadius={'10px'}/>
+              </Box>
+            ))}
+          </Box>
+      </Box>
     </Box>
   );
 };

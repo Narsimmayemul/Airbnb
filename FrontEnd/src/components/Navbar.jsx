@@ -88,9 +88,9 @@ const Navbar = () => {
                 content: '""',
                 position: 'absolute',
                 top: '50%',
-                right: '-10px', // Adjust spacing between items
+                right: '-10px',
                 transform: 'translateY(-50%)',
-                height: '80%', // Adjust the height of the line
+                height: '80%', 
                 width: '1px',
                 backgroundColor: 'black',
               }}
