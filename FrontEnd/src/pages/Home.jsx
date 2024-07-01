@@ -38,7 +38,7 @@ const Home = () => {
   const images = [one, two, three, four, five];
   const videos = [c, d,h ,g,a , e,n,s];
   const gifts = [g1,g2,g3,g5];
-  const process = [cutting,juse,store,packing];
+  const process = [{img:cutting , name:"Choosing"},{img:juse , name:"Juice Extraction"},{img:store , name:"Fermenting"},{img:packing , name:"Packing"}];
   const grap = [blue3,blue4,blue1 , blue2]
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -155,7 +155,7 @@ const Home = () => {
       {/* Subscription yaha hoga */}
       
       <Box display={'flex'} boxShadow={'grey 0px 0px 9px 0px'} gap={'5%'} w={'100%'} h={'100%'} mt={10} p={10} flexDirection={{base:'column' , sm:'row'}} borderRadius={'15px'} justifyContent={'center'} alignItems={'center'}>
-        <Box w={'45%'}  display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
+        <Box w={{base:'85%' , md:'45%'}}  display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
             <Text color={'black'} fontSize={'30px'} fontFamily='Times New Roman Times serif' fontWeight={'bold'}>Wine subscription!</Text>
             <Text color={'black'} fontSize={'18px'} fontFamily='Times New Roman Times serif' >subscription is a journey through the world of wine,four bottles at a time. Each month, we select wines based on a chosen theme and explain how each bottle fits that theme - it's wine education and enjoyment in a equal measure!</Text>
 
@@ -165,7 +165,7 @@ const Home = () => {
             </Box>
         </Box>
 
-        <Box w={'45%'} display={'flex'}>
+        <Box w={{base:'85%' , md:'45%'}} display={'flex'}>
             <Image w={'100%'} src={sub} alt='Image' h={'550px'} borderRadius={'15px'}/>
         </Box>
       </Box>
@@ -183,13 +183,14 @@ const Home = () => {
 
       <Box display={'flex'} flexDirection={'column'}>
         <Text color={'black'} fontFamily={'Times New Roman Times serif'} fontSize={'35px'}>
-          Process Of Wine Making...😋
+          Process Of Our Wine Making...😋
           </Text>
 
           <Box p={10} gap={5} display={'grid'} gridTemplateColumns={{base:'repeat(2,1fr)' , md:'repeat(4,1fr)'}}>
             {process.map((e , i)=>(
               <Box key={i}>
-                <Image src={e} alt='img' h={'250px'} borderRadius={'10px'}/>
+                <Image src={e.img} alt='img' h={'250px'} borderRadius={'10px'}/>
+                <Text color={'black'} fontWeight={'bold'} fontFamily={'Times New Roman Times serif'} fontSize={'20px'}>{e.name}</Text>
               </Box>
             ))}
           </Box>
