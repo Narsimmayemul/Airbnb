@@ -186,7 +186,7 @@ const Home = () => {
           Process Of Our Wine Making...😋
           </Text>
 
-          <Box p={10} gap={5} display={'grid'} gridTemplateColumns={{base:'repeat(2,1fr)' , md:'repeat(4,1fr)'}}>
+          <Box p={10} gap={5} display={'grid'} gridTemplateColumns={{base:'repeat(1,1fr)', sm:'repeat(2,1fr)' , md:'repeat(4,1fr)'}}>
             {process.map((e , i)=>(
               <Box key={i}>
                 <Image src={e.img} alt='img' h={'250px'} borderRadius={'10px'}/>

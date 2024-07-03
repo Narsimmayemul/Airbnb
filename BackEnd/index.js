@@ -39,6 +39,6 @@ app.listen( PORT , ()=>{
             throw new Error();
         }
     } catch (error) {
-        console.log(error)
+        console.log("Error From Connextion:"+error)
     }
 })

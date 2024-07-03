@@ -8,11 +8,52 @@ router.get('/'  , async(req , res)=>{
     try {
         const data = await WineModule.find();
         res.status(200).send(data);  
-        // res.status(200).send('this is data Page');
     } catch (error) {
         res.status(500).send('Error from get Fun:' + error.message)
     }
 })
+
+
+// Sparkling Wine
+// Dessert Wine
+
+router.get('/DessertWine'  , async(req , res)=>{
+  try {
+      const data = await WineModule.find({category:"Dessert Wine"});
+      res.status(200).send(data);  
+  } catch (error) {
+      res.status(500).send('Error from get Fun:' + error.message)
+  }
+})
+
+
+router.get('/SparklingWine'  , async(req , res)=>{
+  try {
+      const data = await WineModule.find({category:"Sparkling Wine"});
+      res.status(200).send(data);  
+  } catch (error) {
+      res.status(500).send('Error from get Fun:' + error.message)
+  }
+})
+
+router.get('/RedWine'  , async(req , res)=>{
+  try {
+      const data = await WineModule.find({category:"Red Wine"});
+      res.status(200).send(data);  
+  } catch (error) {
+      res.status(500).send('Error from get Fun:' + error.message)
+  }
+})
+
+router.get('/WhiteWine'  , async(req , res)=>{
+  try {
+      const data = await WineModule.find({category:"White Wine"});
+      res.status(200).send(data);  
+  } catch (error) {
+      res.status(500).send('Error from get Fun:' + error.message)
+  }
+})
+
 
 router.get("/user/:id", async (req, res) => {
     const { id } = req.params;
