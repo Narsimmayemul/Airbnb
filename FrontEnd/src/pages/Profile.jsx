@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Avatar, Box, FormControl, FormLabel, Heading, Input, Switch, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, FormControl, FormLabel, Heading, Input, Switch, VStack } from '@chakra-ui/react';
 import { UrlContext } from '../context/url';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -13,6 +14,7 @@ const Profile = () => {
   
   const { url } = useContext(UrlContext);
   const id = localStorage.getItem('user');
+  const navigate = useNavigate();
 
   const getUser = async () => {
     try {
@@ -23,6 +25,12 @@ const Profile = () => {
       console.log("Error From Profile Component: " + error);
     }
   };
+
+  const handleClick = ()=>{
+    localStorage.setItem('token' , "");
+    localStorage.setItem('user' , "");
+    navigate('/');
+  }
 
   useEffect(() => {
     getUser();
@@ -50,6 +58,10 @@ const Profile = () => {
             Is Verified?
           </FormLabel>
           <Switch id="isVerified" isChecked={user.isVerified} isReadOnly />
+        </FormControl>
+
+        <FormControl display="flex" alignItems="center" justifyContent={'center'}>
+          <Button bg={''} border={'1px solid black'} onClick={handleClick}>Sign Out</Button>
         </FormControl>
       </VStack>
     </Box>
