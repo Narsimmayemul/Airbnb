@@ -22,8 +22,32 @@ const WineSchema = mongoose.Schema({
     rating : {type:Number , required:true}
 })
 
+const CartSchema = mongoose.Schema({
+    id: {type  : Number , required:true},
+    img_url : {type : String , required:true},
+    name : {type:String , required:true},
+    category : {type:String , required:true},
+    flag : {type :String , required:true},
+    price: {type:Number , required:true},
+    rating : {type:Number , required:true},
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+})
+
+const WishlistSchema = mongoose.Schema({
+    id: {type  : Number , required:true},
+    img_url : {type : String , required:true},
+    name : {type:String , required:true},
+    category : {type:String , required:true},
+    flag : {type :String , required:true},
+    price: {type:Number , required:true},
+    rating : {type:Number , required:true},
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+})
+
 const WineModule = mongoose.model('WineData' , WineSchema);
+const CartData = mongoose.model('CartData' , CartSchema);
+const WishList = mongoose.model('WishlistSchema' , WishlistSchema);
 const userModule = mongoose.model('User' , userSchema);
 
 
-module.exports = {userModule , connection , WineModule}
+module.exports = {userModule , CartData ,WishList, connection , WineModule}
