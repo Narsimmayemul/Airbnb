@@ -13,6 +13,17 @@ router.get('/'  , async(req , res)=>{
     }
 })
 
+router.get('/:id'  , async(req , res)=>{
+  const { id } = req.params;
+    try {
+      const data = await WineModule.findById(id);
+      // const data = await WineModule.find();
+      res.status(200).send(data);  
+  } catch (error) {
+      res.status(500).send('Error from get Fun:' + error.message)
+  }
+})
+
 
 router.get('/DessertWine'  , async(req , res)=>{
   try {
@@ -69,9 +80,17 @@ router.get("/user/:id", async (req, res) => {
   router.post('/cartpost', async (req, res) => {
     const data = req.body;
     try {
+      const id = data.id;
+      const owner = data.owner;
+      const val = await CartData.find({id:id , owner:owner})
+      console.log(val)
+      if(val.length==0){
       console.log(data)
       const result = await CartData.create(data);
       res.status(201).json(result);
+      }else{
+        res.status(500).send("Item Alredy In Cart");
+      }
     } catch (error) {
       res.status(500).send('Error from Post Cart Fun: ' + error.message);
     }
@@ -103,8 +122,16 @@ router.get("/user/:id", async (req, res) => {
     const data = req.body;
     try {
       console.log(data)
-      const result = await WishList.create(data);
-      res.status(201).json(result);
+      const id = data.id;
+      const owner = data.owner;
+      const val = await WishList.find({id:id , owner:owner})
+      console.log(val)
+      if(val.length==0){
+        const result = await WishList.create(data);
+        res.status(201).json(result);
+      }else{
+        res.status(500).send("Item Alredy In Wishlist");
+      }
     } catch (error) {
       res.status(500).send('Error from Post wish Fun: ' + error.message);
     }

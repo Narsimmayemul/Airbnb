@@ -6,10 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { emailContext } from '../context/email';
 import {OrbitProgress, ThreeDot} from 'react-loading-indicators';
 import { AuthContext, useAuth } from '../context/auth';
+import { useToast } from '@chakra-ui/react';
 
 const Login = () => {
   const navigate = useNavigate()
   const { url } = useContext(UrlContext);
+
+  const toast = useToast()
 
   const {setUserMail} = useContext(emailContext)
   // const {setAuthenticated} = useContext(AuthContext)
@@ -49,6 +52,13 @@ const Login = () => {
       setIsLoading(false)
         console.log(error)
       setError(error.response.data.error);
+      const mes = error.response.data;
+      toast({
+        title: mes,
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
     }
   };
 

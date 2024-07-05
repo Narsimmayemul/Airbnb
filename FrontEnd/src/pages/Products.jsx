@@ -1,48 +1,57 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { UrlContext } from '../context/url'
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, FormControl, FormLabel, Image, Select, Stack, Text } from '@chakra-ui/react';
+import { Box, Button,useToast ,Card, CardBody, CardFooter, CardHeader, FormControl, FormLabel, Image, Select, Stack, Text } from '@chakra-ui/react';
 import { OrbitProgress } from 'react-loading-indicators';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import wished from './img/wish/wished.png'
+import wish from './img/wish/wish.png'
 
 const Products = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { url } = useContext(UrlContext);
-  const [cartData , setCartData] = useState([]);
-  const [wishData , setWishData] = useState([]);
+  const [cartData, setCartData] = useState([]);
+  const [wishData, setWishData] = useState([]);
+  const [addCart, setAddCart] = useState([]);
   const userID = localStorage.getItem('user');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const toast = useToast()
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [duplicateItem, setDuplicateItem] = useState(null);
+
+  
 
   const getData = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const res = await axios.get(`${url}api/WineData/`);
       setData(res.data);
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false)
-      console.log('Error from Products Page :' + error)
+      setIsLoading(false);
+      console.log('Error from Products Page :' + error);
     }
   }
 
   const handleFilter = async (e) => {
-    setIsLoading(true)
+    setIsLoading(true);
     const filterValue = e.target.value;
     try {
       const res = await axios.get(`${url}api/WineData/${filterValue}`);
       setData(res.data);
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false)
-      console.log('Error from Filter :' + error)
+      setIsLoading(false);
+      console.log('Error from Filter :' + error);
     }
   }
 
   const handleSort = (e) => {
     const str = e.target.value;
-    const sortedData = [...data]
+    const sortedData = [...data];
     if (str === 'SortPrice(High)') {
       sortedData.sort((a, b) => b.price - a.price);
     } else if (str === 'SortPrice(Low)') {
@@ -56,14 +65,14 @@ const Products = () => {
   }
 
   useEffect(() => {
-    getData()
-    // console.log(cartData)
-  }, [])
+    getData();
+  }, []);
 
-  
+
   const handleAddtoCart = async (item) => {
-    if(!userID){
-      navigate('/signin')
+    if (!userID) {
+      navigate('/signin');
+      throw new Error("Need to login");
     }
     try {
       const obj = {
@@ -76,22 +85,40 @@ const Products = () => {
         rating: item.rating,
         owner: userID
       };
-      
+
       const res = await axios.post(`${url}api/WineData/cartpost`, obj);
-      console.log('Response from server:', res.data);
-      
-      setCartData([...cartData, item]); 
-    }
-     catch (error) {
-    
+      // console.log('Response from server:', res.data);
+
+      setCartData([...cartData, item]);
+
+      setAddCart((prev) => {
+        const isAdded = prev.find(wishItem => wishItem.id === item.id);
+        if (isAdded) {
+          return prev.filter(wishItem => wishItem.id !== item.id);
+        } else {
+          return [...prev, item];
+        }
+      });
+    } catch (error) {
+      const mes = error.response.data;
+      toast({
+        title: mes,
+        // description: mes,
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position:'top'
+      })
       console.log('Error from adding to cart:', error);
     }
   };
 
   const handleWishList = async (item) => {
-    if(!userID){
-      navigate('/signin')
+    if (!userID) {
+      navigate('/signin');
+      throw new Error("Need to login");
     }
+    
     try {
       const obj = {
         id: item.id,
@@ -103,24 +130,42 @@ const Products = () => {
         rating: item.rating,
         owner: userID
       };
-      
+
       const res = await axios.post(`${url}api/WineData/wish`, obj);
       console.log('Response from server:', res.data);
-      
-      setWishData([...wishData, item]); 
-    }
-     catch (error) {
-    
-      console.log('Error from adding to cart:', error);
+
+      setWishData((prev) => {
+        const isWished = prev.find(wishItem => wishItem.id === item.id);
+        if (isWished) {
+          return prev.filter(wishItem => wishItem.id !== item.id);
+        } else {
+          return [...prev, item];
+        }
+      });
+    } catch (error) {
+      const mes = error.response.data;
+      toast({
+        title: mes,
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position:'top'
+      })
+      console.log('Error from adding to wishlist:', error);
     }
   };
-  
 
-  
+  const isAdded = (item)=>{
+    return addCart.find(c => c.id === item.id)
+  }
+
+  const isWished = (item) => {
+    return wishData.find(wishItem => wishItem.id === item.id);
+  };
 
   return (
     <Box bg={'#fff8e9'}>
-      <Box >
+      <Box>
         <Text color={'black'} display={'flex'} fontWeight={'bold'} fontFamily={'Times New Roman Times serif'} ml={'7%'} fontSize={'35px'} alignSelf={'start'}>Products</Text>
       </Box>
 
@@ -150,15 +195,24 @@ const Products = () => {
       {/* Products */}
       {isLoading ? <OrbitProgress variant="dotted" color="#32cd32" size="large" text="" textColor="#2d9f0e" /> :
         <Box bg={'#fff8e9'} p={10} display={'grid'} justifyContent={'center'} gridTemplateColumns={{ lg: 'repeat(3,1fr)', md: 'repeat(2,1fr)', base: 'repeat(1,1fr)' }} gap={'20px'}>
-          {data.map((e , i) => (
+          {data.map((e, i) => (
             <Card boxShadow={'0px 0px 3px 0px'} borderRadius={'15px'} bg={'#fff8e9'} key={e._id} display={'flex'} justifyContent={'center'} flexDirection={{ md: 'row', sm: 'row', lg: 'row', base: 'column' }} w={'100%'} p={3}>
               <CardHeader display={'flex'} w={{ base: '100%', sm: '30%', md: '35%' }} justifyContent={'center'}>
                 <Image h={'250px'} w={{ base: '50%', sm: '100%' }} mixBlendMode={'darken'} src={e.img_url} />
               </CardHeader>
 
               <CardBody justifyContent={'center'} alignItems={'start'} display={'flex'} flexDirection={'column'}>
-                <Box alignSelf={'start'}>
+                <Box alignSelf={'start'} display={'flex'} justifyContent={'space-between'}>
                   <Text color={'black'} fontFamily={'Times New Roman Times serif'} fontWeight={'bold'}>⭐{e.rating + `.${e.rating + e.rating - 2}`}</Text>
+                 
+                  {/* WishList Img */}
+                  <Image
+                    className='WishList'
+                    src={isWished(e) ? wish : wished}
+                    w={'15%'}
+                    cursor={'pointer'}
+                    onClick={() => handleWishList(e)}
+                  />
                 </Box>
 
                 <Box>
@@ -168,7 +222,7 @@ const Products = () => {
                 <Box display={'flex'} gap={5}>
                   <Text color={'black'} fontSize={'20px'} fontFamily={'Times New Roman Times serif'} fontWeight={'bold'}>{e.price}</Text>
                   <Text color={'black'} fontSize={'20px'} fontFamily={'Times New Roman Times serif'} fontWeight={'bold'} textDecoration={'line-through'}>{e.price + Math.ceil(e.price / 25)}</Text>
-                  <Text color={'black'} fontSize={'20px'} fontFamily={'Times New Roman Times serif'} fontWeight={'bold'}>{`${Math.floor(63+i%20)}%`}</Text>
+                  <Text color={'black'} fontSize={'20px'} fontFamily={'Times New Roman Times serif'} fontWeight={'bold'}>{`${Math.floor(63 + i % 20)}%`}</Text>
                 </Box>
 
                 <hr style={{ border: '1px solid black', width: '100%' }} />
@@ -178,7 +232,7 @@ const Products = () => {
                   <Text color={'black'} fontSize={'20px'} fontFamily={'Times New Roman Times serif'} fontWeight={'bold'} mb={'10px'}>{e.region}</Text>
                 </Box>
                 <Box justifyContent={'center'} display={'flex'} w={'100%'}>
-                  <Button onClick={()=>handleAddtoCart(e)} bg={''} border={'1px solid black'} w={'90%'} _hover={{ background: 'green', border: '1px solid grey' }}>Add to Cart</Button>
+                  <Button onClick={() => handleAddtoCart(e)} bg={''} border={'1px solid black'} w={'90%'} _hover={{ background: 'green', border: '1px solid grey' }}>{isAdded(e)?"Added to Cart":"Add to Cart"}</Button>
                 </Box>
               </CardBody>
             </Card>
@@ -189,4 +243,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default Products;

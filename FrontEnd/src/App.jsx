@@ -13,6 +13,7 @@ import Wishlist from './pages/Wishlist';
 import Products from './pages/Products';
 import PrivateRoute from './pages/PrivateRoute';
 import { Route, Routes } from 'react-router-dom';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/verify" element={<VerifyEmail />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/cart" element={<Cart />} />

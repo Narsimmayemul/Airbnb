@@ -29,7 +29,7 @@ const Profile = () => {
   const handleClick = ()=>{
     localStorage.setItem('token' , "");
     localStorage.setItem('user' , "");
-    navigate('/');
+    navigate('/signin');
   }
 
   useEffect(() => {
