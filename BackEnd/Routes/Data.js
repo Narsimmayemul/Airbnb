@@ -13,17 +13,6 @@ router.get('/'  , async(req , res)=>{
     }
 })
 
-router.get('/:id'  , async(req , res)=>{
-  const { id } = req.params;
-    try {
-      const data = await WineModule.findById(id);
-      // const data = await WineModule.find();
-      res.status(200).send(data);  
-  } catch (error) {
-      res.status(500).send('Error from get Fun:' + error.message)
-  }
-})
-
 
 router.get('/DessertWine'  , async(req , res)=>{
   try {
@@ -37,7 +26,8 @@ router.get('/DessertWine'  , async(req , res)=>{
 
 router.get('/SparklingWine'  , async(req , res)=>{
   try {
-      const data = await WineModule.find({category:"Sparkling Wine"});
+      const data = await WineModule.find({category: "Sparkling Wine"});
+      console.log(data)
       res.status(200).send(data);  
   } catch (error) {
       res.status(500).send('Error from get Fun:' + error.message)
@@ -110,7 +100,7 @@ router.get("/user/:id", async (req, res) => {
   router.delete('/cart/:id', async (req, res) => {
     const id = req.params.id;
     try {
-      await CartData.delete(id);
+      await CartData.findByIdAndDelete(id);
       res.status(200).send('Item deleted successfully');
     } catch (error) {
       res.status(500).send('Error from Delete Cart Fun: ' + error.message);
@@ -151,7 +141,7 @@ router.get("/user/:id", async (req, res) => {
   router.delete('/wish/:id', async (req, res) => {
     const id = req.params.id;
     try {
-      await WishList.delete(id);
+      await WishList.findByIdAndDelete(id);
       res.status(200).send('Item deleted successfully');
     } catch (error) {
       res.status(500).send('Error from Delete wish Fun: ' + error.message);

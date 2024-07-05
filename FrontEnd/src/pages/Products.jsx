@@ -132,7 +132,7 @@ const Products = () => {
       };
 
       const res = await axios.post(`${url}api/WineData/wish`, obj);
-      console.log('Response from server:', res.data);
+      // console.log('Response from server:', res.data);
 
       setWishData((prev) => {
         const isWished = prev.find(wishItem => wishItem.id === item.id);
@@ -162,6 +162,10 @@ const Products = () => {
   const isWished = (item) => {
     return wishData.find(wishItem => wishItem.id === item.id);
   };
+
+  const handleDetails = (item)=>{
+    navigate(`/product/${item._id}`, { state: { product: item } });
+  }
 
   return (
     <Box bg={'#fff8e9'}>
@@ -197,7 +201,7 @@ const Products = () => {
         <Box bg={'#fff8e9'} p={10} display={'grid'} justifyContent={'center'} gridTemplateColumns={{ lg: 'repeat(3,1fr)', md: 'repeat(2,1fr)', base: 'repeat(1,1fr)' }} gap={'20px'}>
           {data.map((e, i) => (
             <Card boxShadow={'0px 0px 3px 0px'} borderRadius={'15px'} bg={'#fff8e9'} key={e._id} display={'flex'} justifyContent={'center'} flexDirection={{ md: 'row', sm: 'row', lg: 'row', base: 'column' }} w={'100%'} p={3}>
-              <CardHeader display={'flex'} w={{ base: '100%', sm: '30%', md: '35%' }} justifyContent={'center'}>
+              <CardHeader onClick={()=>handleDetails(e)} cursor={'pointer'} display={'flex'} w={{ base: '100%', sm: '30%', md: '35%' }} justifyContent={'center'}>
                 <Image h={'250px'} w={{ base: '50%', sm: '100%' }} mixBlendMode={'darken'} src={e.img_url} />
               </CardHeader>
 
