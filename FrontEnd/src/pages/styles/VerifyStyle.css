@@ -10,7 +10,7 @@ body {
     /* border: 1px solid black; */
     font-family:'Times New Roman', Times, serif;
     height: 800px;
-    width: 100%;
+    width: 50%;
     justify-content: center;
     align-items: center;
     margin: 0px;
@@ -19,7 +19,7 @@ body {
     box-shadow: rgb(64, 63, 63) 0px 5px 15px 0px;
     margin: 10px;
     padding: 30px;
-    width: 100%;
+    width: 80%;
     border-radius: 15px;
 }
 input{

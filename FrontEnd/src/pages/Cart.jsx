@@ -178,7 +178,7 @@ const Cart = () => {
 
             <CardBody>
              <Input border={'1px solid black'} color={'black'} placeholder='USE "FIRST20" to get 20% OFF' onChange={(e)=>setDiscount(e.target.value)}/>
-             <Button fontFamily={'Times New Roman Times serif'} isDisabled={btn} onClick={()=>{setBtn(true) , handleDicound()}} >Apply Coupon</Button>
+             <Button mt={5} fontFamily={'Times New Roman Times serif'} isDisabled={btn} onClick={()=>{setBtn(true) , handleDicound()}} >Apply Coupon</Button>
              {btn && <Text color={'green'}>You Saved {amt}₹ With This Coupon</Text>}
             </CardBody>
 
