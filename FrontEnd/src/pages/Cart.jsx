@@ -12,6 +12,7 @@ const Cart = () => {
   const [btn, setBtn] = useState(false);
   const [count, setCount] = useState({});
   const [total, setTotal] = useState(0);
+  const [amt, setAmt] = useState(0);
   const [discount, setDiscount] = useState("");
   const id = localStorage.getItem('user');
   const toast = useToast();
@@ -98,6 +99,7 @@ const Cart = () => {
   const handleDicound = ()=>{
     if(discount == "FIRST20"){
       const dis = total*0.20;
+      setAmt(dis)
       setTotal((pre)=>total-dis);
       toast({
         status: 'success',
@@ -177,6 +179,7 @@ const Cart = () => {
             <CardBody>
              <Input border={'1px solid black'} color={'black'} placeholder='USE "FIRST20" to get 20% OFF' onChange={(e)=>setDiscount(e.target.value)}/>
              <Button fontFamily={'Times New Roman Times serif'} isDisabled={btn} onClick={()=>{setBtn(true) , handleDicound()}} >Apply Coupon</Button>
+             {btn && <Text color={'green'}>You Saved {amt}₹ With This Coupon</Text>}
             </CardBody>
 
             <CardFooter display={'flex'} justifyContent={'center'} flexDirection={'column'}>
