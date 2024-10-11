@@ -29,9 +29,9 @@ const Products = () => {
     try {
       const res = await axios.get(`${url}api/WineData/`);
       setData(res.data);
-      setIsLoading(false);
+      setIsLoading(true);
     } catch (error) {
-      setIsLoading(false);
+      setIsLoading(true);
       console.log('Error from Products Page :' + error);
     }
   }
@@ -87,7 +87,6 @@ const Products = () => {
       };
 
       const res = await axios.post(`${url}api/WineData/cartpost`, obj);
-      // console.log('Response from server:', res.data);
 
       setCartData([...cartData, item]);
 
@@ -132,8 +131,7 @@ const Products = () => {
       };
 
       const res = await axios.post(`${url}api/WineData/wish`, obj);
-      // console.log('Response from server:', res.data);
-
+  
       setWishData((prev) => {
         const isWished = prev.find(wishItem => wishItem.id === item.id);
         if (isWished) {
@@ -166,6 +164,16 @@ const Products = () => {
   const handleDetails = (item)=>{
     navigate(`/product/${item._id}`, { state: { product: item } });
   }
+  const [timeCount , setTimeCount]= useState(100);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeCount((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+    }, 1000); 
+
+    return () => clearInterval(timer); 
+  }, []);
+ 
 
   return (
     <Box bg={'#fff8e9'}>
@@ -195,9 +203,7 @@ const Products = () => {
           </Select>
         </Box>
       </Box>
-
-      {/* Products */}
-      {isLoading ? <OrbitProgress variant="dotted" color="#32cd32" size="large" text="" textColor="#2d9f0e" /> :
+      {isLoading ? <OrbitProgress variant="dotted" color="#32cd32" size="large" text={`${timeCount}...`} textColor="#2d9f0e" /> :
         <Box bg={'#fff8e9'} p={10} display={'grid'} justifyContent={'center'} gridTemplateColumns={{ lg: 'repeat(3,1fr)', md: 'repeat(2,1fr)', base: 'repeat(1,1fr)' }} gap={'20px'}>
           {data.map((e, i) => (
             <Card boxShadow={'0px 0px 3px 0px'} borderRadius={'15px'} bg={'#fff8e9'} key={e._id} display={'flex'} justifyContent={'center'} flexDirection={{ md: 'row', sm: 'row', lg: 'row', base: 'column' }} w={'100%'} p={3}>

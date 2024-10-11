@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Card, CardBody, CardFooter, Image, HStack, IconButton, CardHeader, Text, Button, Input } from '@chakra-ui/react';
 import { FaCircle } from 'react-icons/fa';
-import one from './img/one.jpg';
-import two from './img/two.jpg';
-import three from './img/three.jpg';
-import four from './img/four.jpg';
-import five from './img/five.jpg';
+import one from './img/one-min.jpg';
+import two from './img/two-min.jpg';
+import three from './img/three-min.jpg';
+import four from './img/four-min.jpg';
+import five from './img/five-min.jpg';
 import a from './video/a.mp4';
 import b from './video/b.mp4';
 import c from './video/c.mp4';
@@ -16,21 +16,21 @@ import g from './video/g.mp4';
 import h from './video/h.mp4';
 import n from './video/n.mp4';
 import s from './video/s.mp4';
-import g1 from './img/g1.jpg';
-import g2 from './img/g2.jpg';
-import g3 from './img/g3.jpg';
-import g4 from './img/g4.jpg';
-import g5 from './img/g5.jpg';
-import sub from './img/sub.jpg';
+import g1 from './img/g1-min.jpg';
+import g2 from './img/g2-min.jpg';
+import g3 from './img/g3-min.jpg';
+import g4 from './img/g4-min.jpg';
+import g5 from './img/g5-min.jpg';
+import sub from './img/sub-min.jpg';
 import { useNavigate } from 'react-router-dom';
-import cutting from './img/making/cuting.jpg'
-import juse from './img/making/juse.jpg'
-import store from './img/making/store.jpg'
-import packing from './img/making/packing.jpg'
-import blue1 from './img/making/blue1.jpg'
-import blue2 from './img/making/blue2.jpg'
-import blue3 from './img/making/blue3.jpg'
-import blue4 from './img/making/blue4.jpg'
+import cutting from './img/making/cuting-min.jpg'
+import juse from './img/making/juse-min.jpg'
+import store from './img/making/store-min.jpg'
+import packing from './img/making/packing-min.jpg'
+import blue1 from './img/making/blue1-min.jpg'
+import blue2 from './img/making/blue2-min.jpg'
+import blue3 from './img/making/blue3-min.jpg'
+import blue4 from './img/making/blue4-min.jpg'
 
 
 

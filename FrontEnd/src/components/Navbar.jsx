@@ -142,16 +142,6 @@ const Navbar = () => {
               color="black"
               position="relative"
               mr={4}
-              // _after={{
-              //   content: '""',
-              //   position: 'absolute',
-              //   top: '50%',
-              //   right: '-10px', // Adjust spacing between items
-              //   transform: 'translateY(-50%)',
-              //   height: '80%', // Adjust the height of the line
-                // width: '1px',
-              //   backgroundColor: 'black',
-              // }}
             >
               Dessert Wine
             </Text>
