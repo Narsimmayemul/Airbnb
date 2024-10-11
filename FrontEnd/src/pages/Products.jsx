@@ -29,9 +29,9 @@ const Products = () => {
     try {
       const res = await axios.get(`${url}api/WineData/`);
       setData(res.data);
-      setIsLoading(true);
+      setIsLoading(false);
     } catch (error) {
-      setIsLoading(true);
+      setIsLoading(false);
       console.log('Error from Products Page :' + error);
     }
   }
