@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UrlContext } from '../context/url';
 import { emailContext } from '../context/email';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const { url } = useContext(UrlContext);
@@ -12,11 +13,14 @@ const Signup = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${url}signup`, { username, email, password });
       setMessage(response.data.message);
+      navigate('/');
     } catch (error) {
       setError('Signup failed');
       console.log(error)

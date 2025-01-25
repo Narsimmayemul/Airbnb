@@ -42,9 +42,9 @@ const Login = () => {
       if(isSignUp){
         setUserMail(response.data.user)
         login(token)
-        setAuthenticated(true);
-        console.log(token)
-        navigate('/verify')
+        // setAuthenticated(true);
+        // console.log(token)
+        navigate('/')
       }else{
           navigate('/')
         }
