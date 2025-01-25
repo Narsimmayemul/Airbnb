@@ -31,34 +31,36 @@ router.post('/', async (req, res) => {
             isVerified: false
         });
 
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.EMAIL_PASSWORD 
-            }
-        });
+        // const transporter = nodemailer.createTransport({
+        //     service: 'gmail',
+        //     auth: {
+        //         user: process.env.EMAIL,
+        //         pass: process.env.EMAIL_PASSWORD 
+        //     }
+        // });
         
-// console.log('password:'+process.env.EMAIL_PASSWORD);
-        const mailOptions = {
-            from: process.env.EMAIL,
-            to: email,
-            subject: 'Email Verification',
-            text: `Your verification code is ${verificationCode}`
-        };
+        // g('password:'+process.env.EMAIL_PASSWORD);
+        // const mailOptions = {
+        //     from: process.env.EMAIL,
+        //     to: email,
+        //     subject: 'Email Verification',
+        //     text: `Your verification code is ${verificationCode}`
+        // };
 
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Error sending verification email:', error);
-                return res.status(500).send({ message: 'Error sending verification email', error });
-            } else {
-                console.log('Verification email sent:', info.response);
-                res.status(201).send({ message: 'User created successfully, verification email sent', user: newUser });
-            }
-        });
-    } catch (error) {
+        // transporter.sendMail(mailOptions, (error, info) => {
+        //     if (error) {
+        //         console.error('Error sending verification email:', error);
+                // return res.status(500).send({ message: 'Error sending verification email', error });
+                res.status(201).send({ message: 'User created successfully, verification email sent', user: newUser });        
+        //     } else {
+        //         console.log('Verification email sent:', info.response);
+        //         res.status(201).send({ message: 'User created successfully, verification email sent', user: newUser });
+        //     }
+        // });
+    } 
+    catch (error) {
         console.error('Error Creating User:', error);
-        res.status(500).json({ error: 'Username alredy Exists', details: error.message });
+        // res.status(500).json({ error: 'Username alredy Exists', details: error.message });
     }
 });
 
