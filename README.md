@@ -18,9 +18,8 @@ we learned a lot while working on this project. we failed so many times and we n
 
 *Description of Project.*
 
-The Masai school give our team to clone the website Mine Wine. 
 Mine Wine is a popular Wine's company known for its minimalist and clean Wine's quality. They sell a variety of Wine's, and they have an online store where you can browse and purchase their products.
-we gave our best to clone this website.
+i gave my best to clone this website.
 
 
 
@@ -65,7 +64,6 @@ Git and Github.
 
 Git: Git is software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development. Its goals include speed, data integrity, and support for distributed, non-linear workflows
 Github: GitHub, Inc. is a provider of Internet hosting for software development and version control using Git. It offers the distributed version control and source code management functionality of Git, plus its features.
-https://github.com/Vikaschaturvedi167/WineShop_project this is our project git hub link.
 We all became proficient in reading the code of team members. and we learned How to work and communicate with a team. and how to keep motivated each other throughout the problems.
 
 
